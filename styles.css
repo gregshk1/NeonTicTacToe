@@ -1,0 +1,124 @@
+body {
+    background-color: #0a0a0a;
+    color: #00ff00;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+}
+
+h1 {
+    font-size: 3rem;
+    text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
+}
+
+.mode-selection button {
+    background-color: #00ff00;
+    color: #0a0a0a;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
+}
+
+.difficulty-selection {
+    margin: 20px 0;
+}
+
+.difficulty-selection button {
+    background-color: #00ff00;
+    color: #0a0a0a;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
+}
+
+.difficulty-selection button:hover {
+    background-color: #00cc00;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 10px;
+    margin: 20px auto;
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    background-color: #1a1a1a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    cursor: pointer;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
+}
+
+.cell:hover {
+    background-color: #2a2a2a;
+}
+
+.status {
+    font-size: 1.5rem;
+    margin: 20px 0;
+}
+
+#reset {
+    background-color: #ff0000;
+    color: #0a0a0a;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;
+}
+
+.scoreboard {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+.score {
+    font-size: 1.5rem;
+    text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
+}
+
+.cell:hover {
+    transform: scale(1.1);
+    transition: transform 0.2s ease-in-out;
+    background-color: #2a2a2a;
+}
+
+@keyframes glow {
+    0% {
+        opacity: 0;
+        box-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
+    }
+    100% {
+        opacity: 1;
+        box-shadow: 0 0 20px #00ff00, 0 0 40px #00ff00;
+    }
+}
+
+.cell.marked {
+    animation: glow 0.5s ease-in-out;
+}
