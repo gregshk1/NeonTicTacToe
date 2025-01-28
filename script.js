@@ -1,5 +1,3 @@
-
-
 import { easyAIMove, hardAIMove } from './ai.js';
 
 const cells = document.querySelectorAll('.cell');
@@ -15,9 +13,9 @@ const scoreO = document.querySelector('#score-o');
 
 let currentPlayer = 'X';
 let gameState = ['', '', '', '', '', '', '', '', ''];
-let gameActive = true;
+let gameActive = false; // Agora o jogo só começa quando um modo for escolhido
 let vsAI = false;
-let aiDifficulty = 'easy';
+let aiDifficulty = '';
 let winsX = 0;
 let winsO = 0;
 
@@ -33,10 +31,12 @@ const winningConditions = [
 ];
 
 function handleCellClick(event) {
+    if (!gameActive) return;
+
     const clickedCell = event.target;
     const clickedCellIndex = parseInt(clickedCell.getAttribute('data-index'));
 
-    if (gameState[clickedCellIndex] !== '' || !gameActive) {
+    if (gameState[clickedCellIndex] !== '') {
         return;
     }
 
@@ -73,8 +73,7 @@ function checkForWinner() {
         return;
     }
 
-    const roundDraw = !gameState.includes('');
-    if (roundDraw) {
+    if (!gameState.includes('')) {
         statusText.textContent = 'Empate!';
         gameActive = false;
         return;
@@ -84,7 +83,7 @@ function checkForWinner() {
     statusText.textContent = `Vez do Jogador ${currentPlayer}`;
 
     if (vsAI && currentPlayer === 'O') {
-        aiMove();
+        setTimeout(aiMove, 500);
     }
 }
 
@@ -114,34 +113,47 @@ function aiMove() {
 
 function resetGame() {
     gameState = ['', '', '', '', '', '', '', '', ''];
-    gameActive = true;
+    gameActive = false;
     currentPlayer = 'X';
-    statusText.textContent = `Vez do Jogador ${currentPlayer}`;
+    statusText.textContent = 'Escolha um modo para começar';
     cells.forEach(cell => {
         cell.textContent = '';
         cell.classList.remove('marked');
     });
 }
 
+function sortearPrimeiroJogador() {
+    currentPlayer = Math.random() < 0.5 ? 'X' : 'O';
+    statusText.textContent = `Jogador ${currentPlayer} começa!`;
+}
+
 function setPVPMode() {
     vsAI = false;
-    difficultySelection.style.display = 'none'; 
+    aiDifficulty = '';
+    difficultySelection.style.display = 'none';
+    gameActive = true;
+    sortearPrimeiroJogador();
 }
 
 function setAIMode() {
     vsAI = true;
-    difficultySelection.style.display = 'block'; 
-    resetGame();
+    difficultySelection.style.display = 'block';
+    gameActive = false;
 }
+
 
 easyAIButton.addEventListener('click', () => {
     aiDifficulty = 'easy';
-    resetGame();
+    gameActive = true;
+    difficultySelection.style.display = 'none';
+    sortearPrimeiroJogador();
 });
 
 hardAIButton.addEventListener('click', () => {
     aiDifficulty = 'hard';
-    resetGame();
+    gameActive = true;
+    difficultySelection.style.display = 'none';
+    sortearPrimeiroJogador();
 });
 
 cells.forEach(cell => cell.addEventListener('click', handleCellClick));

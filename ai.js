@@ -30,7 +30,6 @@ export function easyAIMove(gameState) {
 }
 
 export function hardAIMove(gameState) {
-    // 1. Verifica se a IA pode vencer na próxima jogada
     const winningMove = isPlayerAboutToWin(gameState, 'O');
     if (winningMove !== null) {
         return winningMove;

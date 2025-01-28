@@ -50,6 +50,12 @@ h1 {
     background-color: #00cc00;
 }
 
+.selected {
+    background-color: #008000 !important;
+    box-shadow: 0 0 15px #00ff00, 0 0 30px #00ff00;
+}
+
+
 .board {
     display: grid;
     grid-template-columns: repeat(3, 100px);
